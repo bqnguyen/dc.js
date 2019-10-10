@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +36,8 @@ library by Mikola Lysenko.</p>
 <script type="text/javascript" src="../js/crossfilter.js"></script>
 <script type="text/javascript" src="../js/dc.js"></script>
 
+    
+   
 <script>
     "use strict"
 function compileSearch(funcName, predicate, reversed, extraArgs, earlyOut) {
@@ -416,14 +417,14 @@ function lysenkoIntervalTree(intervals) {
   }
   return new IntervalTree(createIntervalTree(intervals))
 }
-    </script>
-	
-	
-	
-	
-	
-	
+    </script> 
+    
+    
+    
+    
+    
  <script type="text/javascript">
+
   function intervalTreeGroup(tree, firstDate, lastDate) {
       return {
           all: function() {
@@ -445,13 +446,15 @@ function lysenkoIntervalTree(intervals) {
           }
       };
   }
+
   var dateFormatSpecifier = '%x';
   var timeFormat = d3.timeFormat(dateFormatSpecifier);
   var dateFormatParser = d3.timeParse(dateFormatSpecifier);
   var monthChart = dc.barChart("#month");
   var costChart = dc.barChart("#cost");
   // data from http://stackoverflow.com/questions/22603788/crossfilter-how-to-extract-time-information-from-start-date-and-end-date-column
-  d3.csv("interval.csv").then(function(projects) {
+  d3.csv("intervals.csv").then(function(projects) {
+
       projects.forEach(function(x) {
           x['Start Date'] = dateFormatParser(x['Start Date']);
           x['End Date'] = dateFormatParser(x['End Date']);
@@ -462,6 +465,7 @@ function lysenkoIntervalTree(intervals) {
       // the interval tree library doesn't seem to provide start/end info
       var firstDate = d3.min(projects, function(x) { return x['Start Date']; }),
           lastDate = d3.max(projects, function(x) { return x['End Date']; });
+
       var ndx = crossfilter(projects),
           intervalDimension = ndx.dimension(function(d) {return d.interval;}),
           projectsPerMonthTree = ndx.groupAll().reduce(
@@ -480,6 +484,7 @@ function lysenkoIntervalTree(intervals) {
           projectsPerMonthGroup = intervalTreeGroup(projectsPerMonthTree.value(), firstDate, lastDate),
           projectCostDimension = ndx.dimension(function(d) { return d.Cost; }),
           projectCostGroup = projectCostDimension.group();
+
       monthChart
           .width(400)
           .height(300)
@@ -494,6 +499,7 @@ function lysenkoIntervalTree(intervals) {
           .dimension(intervalDimension)
           .group(projectsPerMonthGroup)
           .controlsUseVisibility(true);
+
       monthChart.filterHandler(function(dim, filters) {
           if(filters && filters.length) {
               if(filters.length !== 1)
@@ -506,6 +512,8 @@ function lysenkoIntervalTree(intervals) {
           else dim.filterAll();
           return filters;
       });
+
+
       costChart
           .width(400)
           .height(300)
@@ -517,8 +525,12 @@ function lysenkoIntervalTree(intervals) {
           .dimension(projectCostDimension)
           .group(projectCostGroup)
           .controlsUseVisibility(true);
+
       dc.renderAll();
   });
+
 </script>
+
+</div>
 </body>
 </html>
