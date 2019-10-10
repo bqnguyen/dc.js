@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+
+
+<!doctype html>
+<html lang='eng'>
 <head>
-    <title>dc.js - Time Intervals Example</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/dc.css"/>
-    <link type="text/css" rel="stylesheet" href="../css/dc-floatleft.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.4.7/crossfilter.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.6/dc.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  	<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reductio/0.6.3/reductio.min.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.6/dc.css">
+   <link href="https://cdn.datatables.net/1.10.8/css/jquery.dataTables.min.css" rel="stylesheet" type='text/css' />
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 <body>
-
-<div class="container">
-<script type="text/javascript" src="header.js"></script>
-
-<p>This demonstrates using an <a href="https://en.wikipedia.org/wiki/Interval_tree">interval
-tree</a> to plot items which span from a begin date to an end date. The brush will intersect with
-any items whose intervals overlap with it.</p>
-
-<p>It uses the <a href="https://github.com/mikolalysenko/interval-tree-1d">interval-tree-1d</a>
-library by Mikola Lysenko.</p>
-
   <div id="month">
     <div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>
       <a href="javascript:monthChart.filterAll();dc.redrawAll();">reset</a>
@@ -29,15 +34,6 @@ library by Mikola Lysenko.</p>
       <a href="javascript:costChart.filterAll();dc.redrawAll();">reset</a>
     </div>
   </div>
-
-    <script type="text/javascript" src="../js/promise-polyfill.js"></script>
-    <script type="text/javascript" src="../js/fetch.umd.js"></script>
-<script type="text/javascript" src="../js/d3.js"></script>
-<script type="text/javascript" src="../js/crossfilter.js"></script>
-<script type="text/javascript" src="../js/dc.js"></script>
-
-    
-   
 <script>
     "use strict"
 function compileSearch(funcName, predicate, reversed, extraArgs, earlyOut) {
@@ -417,14 +413,14 @@ function lysenkoIntervalTree(intervals) {
   }
   return new IntervalTree(createIntervalTree(intervals))
 }
-    </script> 
-    
-    
-    
-    
-    
+    </script>
+	
+	
+	
+	
+	
+	
  <script type="text/javascript">
-
   function intervalTreeGroup(tree, firstDate, lastDate) {
       return {
           all: function() {
@@ -446,15 +442,13 @@ function lysenkoIntervalTree(intervals) {
           }
       };
   }
-
   var dateFormatSpecifier = '%x';
   var timeFormat = d3.timeFormat(dateFormatSpecifier);
   var dateFormatParser = d3.timeParse(dateFormatSpecifier);
   var monthChart = dc.barChart("#month");
   var costChart = dc.barChart("#cost");
   // data from http://stackoverflow.com/questions/22603788/crossfilter-how-to-extract-time-information-from-start-date-and-end-date-column
-  d3.csv("intervals.csv").then(function(projects) {
-
+  d3.csv("interval.csv").then(function(projects) {
       projects.forEach(function(x) {
           x['Start Date'] = dateFormatParser(x['Start Date']);
           x['End Date'] = dateFormatParser(x['End Date']);
@@ -465,7 +459,6 @@ function lysenkoIntervalTree(intervals) {
       // the interval tree library doesn't seem to provide start/end info
       var firstDate = d3.min(projects, function(x) { return x['Start Date']; }),
           lastDate = d3.max(projects, function(x) { return x['End Date']; });
-
       var ndx = crossfilter(projects),
           intervalDimension = ndx.dimension(function(d) {return d.interval;}),
           projectsPerMonthTree = ndx.groupAll().reduce(
@@ -484,7 +477,6 @@ function lysenkoIntervalTree(intervals) {
           projectsPerMonthGroup = intervalTreeGroup(projectsPerMonthTree.value(), firstDate, lastDate),
           projectCostDimension = ndx.dimension(function(d) { return d.Cost; }),
           projectCostGroup = projectCostDimension.group();
-
       monthChart
           .width(400)
           .height(300)
@@ -499,7 +491,6 @@ function lysenkoIntervalTree(intervals) {
           .dimension(intervalDimension)
           .group(projectsPerMonthGroup)
           .controlsUseVisibility(true);
-
       monthChart.filterHandler(function(dim, filters) {
           if(filters && filters.length) {
               if(filters.length !== 1)
@@ -512,8 +503,6 @@ function lysenkoIntervalTree(intervals) {
           else dim.filterAll();
           return filters;
       });
-
-
       costChart
           .width(400)
           .height(300)
@@ -525,12 +514,8 @@ function lysenkoIntervalTree(intervals) {
           .dimension(projectCostDimension)
           .group(projectCostGroup)
           .controlsUseVisibility(true);
-
       dc.renderAll();
   });
-
 </script>
-
-</div>
 </body>
 </html>
