@@ -1,29 +1,25 @@
 
-
-<!doctype html>
-<html lang='eng'>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.4.7/crossfilter.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.6/dc.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-  	<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/reductio/0.6.3/reductio.min.js"></script>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.6/dc.css">
-   <link href="https://cdn.datatables.net/1.10.8/css/jquery.dataTables.min.css" rel="stylesheet" type='text/css' />
-<script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <title>dc.js - Time Intervals Example</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/dc.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/dc-floatleft.css"/>
 </head>
 <body>
+
+<div class="container">
+<script type="text/javascript" src="header.js"></script>
+
+<p>This demonstrates using an <a href="https://en.wikipedia.org/wiki/Interval_tree">interval
+tree</a> to plot items which span from a begin date to an end date. The brush will intersect with
+any items whose intervals overlap with it.</p>
+
+<p>It uses the <a href="https://github.com/mikolalysenko/interval-tree-1d">interval-tree-1d</a>
+library by Mikola Lysenko.</p>
+
   <div id="month">
     <div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>
       <a href="javascript:monthChart.filterAll();dc.redrawAll();">reset</a>
@@ -34,6 +30,13 @@
       <a href="javascript:costChart.filterAll();dc.redrawAll();">reset</a>
     </div>
   </div>
+
+    <script type="text/javascript" src="../js/promise-polyfill.js"></script>
+    <script type="text/javascript" src="../js/fetch.umd.js"></script>
+<script type="text/javascript" src="../js/d3.js"></script>
+<script type="text/javascript" src="../js/crossfilter.js"></script>
+<script type="text/javascript" src="../js/dc.js"></script>
+
 <script>
     "use strict"
 function compileSearch(funcName, predicate, reversed, extraArgs, earlyOut) {
