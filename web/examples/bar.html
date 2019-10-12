@@ -28,7 +28,7 @@ d3.csv("morley.csv").then(function(experiments) {
 
   var ndx                 = crossfilter(experiments),
       runDimension        = ndx.dimension(function(d) {return +d.Run;}),
-      speedSumGroup       = runDimension.group().reduceSum(function(d) {return d.Speed * d.Run / 1000;});
+      speedSumGroup       = runDimension.group().reduceSum(function(d) {return d.Speed / d.Run ;});
 
   chart
     .width(768)
