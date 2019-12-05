@@ -53,6 +53,8 @@ d3.csv("morley.csv").then(function(experiments) {
            count++;
    array.push(d.key,d.value);
       console.log("array size: " + array.length);
+      
+          console.log(array);
  
       console.log(count);
             console.log("d.key"+" "+d.key+"value"+d.value);
@@ -65,7 +67,7 @@ d3.csv("morley.csv").then(function(experiments) {
   dc.renderAll();
     
     
-      console.log(array);
+  
        for(var i=0;i<5;i++){
           
           for (var j=0;j<20;j++){
