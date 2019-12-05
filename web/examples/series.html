@@ -61,10 +61,9 @@ d3.csv("morley.csv").then(function(experiments) {
   chart.margins().left += 40;
 
   dc.renderAll();
-
-});
-
-    console.log(array);
+    
+    
+      console.log(array);
        for(var i=0;i<5;i++){
           
           for (var j=0;j<20;j++){
@@ -72,7 +71,12 @@ d3.csv("morley.csv").then(function(experiments) {
           }
           
       }
+      
     
+
+});
+
+
 function load_button(file) {
     return function load_it() {
         d3.csv(file).then(function(experiments) {
