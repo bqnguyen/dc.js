@@ -50,8 +50,10 @@ d3.csv("morley.csv").then(function(experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     .valueAccessor(function(d) {
       
+           count++;
    array.push(d.key,d.value);
-      count++;
+      console.log("array size: " + array.length);
+ 
       console.log(count);
             console.log("d.key"+" "+d.key+"value"+d.value);
       
