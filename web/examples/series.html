@@ -50,6 +50,7 @@ d3.csv("morley.csv").then(function(experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     .valueAccessor(function(d) {
       
+   array.push(d.key,d.value);
       count++;
       console.log(count);
             console.log("d.key"+" "+d.key+"value"+d.value);
@@ -63,6 +64,15 @@ d3.csv("morley.csv").then(function(experiments) {
 
 });
 
+    console.log(array);
+       for(var i=0;i<5;i++){
+          
+          for (var j=0;j<20;j++){
+              
+          }
+          
+      }
+    
 function load_button(file) {
     return function load_it() {
         d3.csv(file).then(function(experiments) {
