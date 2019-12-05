@@ -48,6 +48,7 @@ d3.csv("morley.csv").then(function(experiments) {
     .keyAccessor(function(d) {return +d.key[1];})
     .valueAccessor(function(d) {return +d.value - 500;
                console.log("d.key"+" "+d.key+"value"+d.value);
+                               }
     .legend(dc.legend().x(350).y(350).itemHeight(13).gap(5).horizontal(1).legendWidth(140).itemWidth(70));
   chart.yAxis().tickFormat(function(d) {return d3.format(',d')(d+299500);});
   chart.margins().left += 40;
